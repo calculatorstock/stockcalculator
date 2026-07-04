@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><style>
+body{font-family:Arial;background:#101820;color:#fff;margin:0}header{padding:15px;background:#0b5ed7}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;padding:15px}.card{background:#1f2937;padding:15px;border-radius:10px;text-align:center;cursor:pointer}.modal{display:none;position:fixed;inset:0;background:#0008}.box{background:#fff;color:#000;max-width:430px;margin:5% auto;padding:20px;border-radius:10px}input{width:100%;padding:8px;margin:5px 0}button{padding:8px 12px}
+</style></head><body><header><h2>Stock Market Calculator Hub</h2></header><div class='grid'><div class='card' onclick="openCalc('sip')">SIP</div>
+<div class='card' onclick="openCalc('cagr')">CAGR</div>
+<div class='card' onclick="openCalc('pl')">Profit/Loss</div>
+<div class='card' onclick="openCalc('avg')">Average Price</div>
+<div class='card' onclick="openCalc('rr')">Risk/Reward</div>
+<div class='card' onclick="openCalc('ps')">Position Size</div>
+<div class='card' onclick="openCalc('brok')">Brokerage</div>
+<div class='card' onclick="openCalc('div')">Dividend Yield</div>
+<div class='card' onclick="openCalc('mc')">Market Cap</div>
+<div class='card' onclick="openCalc('pe')">P/E Ratio</div>
+<div class='card' onclick="openCalc('ci')">Compound Interest</div>
+<div class='card' onclick="openCalc('lum')">Lumpsum</div></div><div id='modal' class='modal'><div class='box'><button onclick='closeM()'>Close</button><div id='content'></div></div></div><script>
+function openCalc(t){
+let h='';
+switch(t){
+case 'sip':h=`<h3>SIP</h3><input id=m placeholder='Monthly'><input id=r placeholder='Annual %'><input id=y placeholder='Years'><button onclick="let R=r.value/1200,N=y.value*12,F=m.value*((Math.pow(1+R,N)-1)/R)*(1+R);res.innerHTML='₹ '+F.toFixed(2)">Calc</button><p id=res></p>`;break;
+case 'cagr':h=`<h3>CAGR</h3><input id=a placeholder='Start'><input id=b placeholder='End'><input id=c placeholder='Years'><button onclick="x.innerHTML=((Math.pow(b.value/a.value,1/c.value)-1)*100).toFixed(2)+'%'">Calc</button><p id=x></p>`;break;
+case 'pl':h=`<h3>P/L</h3><input id=bp placeholder='Buy'><input id=sp placeholder='Sell'><input id=q placeholder='Qty'><button onclick="x.innerHTML='₹ '+((sp.value-bp.value)*q.value).toFixed(2)">Calc</button><p id=x></p>`;break;
+case 'avg':h=`<h3>Average</h3><input id=p1 placeholder='P1'><input id=q1 placeholder='Q1'><input id=p2 placeholder='P2'><input id=q2 placeholder='Q2'><button onclick="x.innerHTML=(((p1.value*q1.value)+(p2.value*q2.value))/(+q1.value + +q2.value)).toFixed(2)">Calc</button><p id=x></p>`;break;
+case 'rr':h=`<h3>Risk Reward</h3><input id=e placeholder='Entry'><input id=sl placeholder='SL'><input id=tp placeholder='Target'><button onclick="x.innerHTML=((tp.value-e.value)/(e.value-sl.value)).toFixed(2)+' : 1'">Calc</button><p id=x></p>`;break;
+case 'ps':h=`<h3>Position Size</h3><input id=cap placeholder='Capital'><input id=risk placeholder='Risk %'><input id=ers placeholder='Entry-SL diff'><button onclick="x.innerHTML=Math.floor((cap.value*risk.value/100)/ers.value)+' shares'">Calc</button><p id=x></p>`;break;
+default:h=`<h3>${t}</h3><p>Calculator UI placeholder. Add formula later.</p>`;
+}
+content.innerHTML=h;modal.style.display='block';
+}
+function closeM(){modal.style.display='none'}
+</script></body></html>
